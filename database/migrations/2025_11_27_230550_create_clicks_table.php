@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('clicks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('link_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('ip', 45);
+            $table->text('user_agent');
+            $table->timestamp('clicked_at');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('clicks');

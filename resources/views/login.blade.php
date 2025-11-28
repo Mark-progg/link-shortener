@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('app')
 
 @section('content')
     <h1>Вход в систему</h1>
@@ -24,15 +24,27 @@
         </div>
     </form>
 
-    <h2>Тестовые учётные данные</h2>
+    <h4>Тестовые учётные данные</h4>
     <table>
         <thead>
-        <tr><th>Email</th><th>Пароль</th></tr>
+        <tr>
+            <th>Email</th>
+            <th>Пароль</th>
+        </tr>
         </thead>
         <tbody>
-        <tr><td>test1@example.com</td><td><code>password</code></td></tr>
-        <tr><td>test2@example.com</td><td><code>password</code></td></tr>
-        <tr><td>test3@example.com</td><td><code>password</code></td></tr>
+        <tr>
+            <td>test1@example.com</td>
+            <td>password</td>
+        </tr>
+        <tr>
+            <td>test2@example.com</td>
+            <td>password</td>
+        </tr>
+        <tr>
+            <td>test3@example.com</td>
+            <td>password</td>
+        </tr>
         </tbody>
     </table>
 @endsection

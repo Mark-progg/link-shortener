@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
+    postgresql-client \
+    iputils-ping \
     && docker-php-ext-install \
         pdo \
         pdo_pgsql \
@@ -26,3 +28,4 @@ COPY ./docker/php/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
+
