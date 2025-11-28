@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: link-shortener-app
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - app-network
+    command: ["php-fpm"]
+
+  artisan:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: link-shortener-artisan
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
+  db:
+    image: postgres:15
+    container_name: link-shortener-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: link_shortener
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
